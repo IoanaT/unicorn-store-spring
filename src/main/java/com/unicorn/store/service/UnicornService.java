@@ -13,6 +13,7 @@ import java.util.UUID;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
+import org.springframework.ai.tool.annotation.Tool;
 
 @Service
 public class UnicornService {
@@ -25,6 +26,7 @@ public class UnicornService {
         this.unicornPublisher = unicornPublisher;
     }
 
+    @Tool(description = "Create a new unicorn in the unicorn store.")
     @Transactional
     public Unicorn createUnicorn(Unicorn unicorn) {
         logger.debug("Creating unicorn: {}", unicorn);
@@ -39,8 +41,9 @@ public class UnicornService {
         logger.debug("Created unicorn with ID: {}", savedUnicorn.getId());
         return savedUnicorn;
     }
-
-    public List<Unicorn> getAllUnicorns() {
+    
+    @Tool(description = "Get a list of all unicorns in the unicorn store")
+    public List<Unicorn> getAllUnicorns(String... parameters) {
         logger.debug("Retrieving all unicorns");
         return StreamSupport
                 .stream(unicornRepository.findAll().spliterator(), false)

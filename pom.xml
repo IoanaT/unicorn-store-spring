@@ -22,6 +22,7 @@
         <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <spring-ai.version>1.0.1</spring-ai.version>
     </properties>
     <dependencyManagement>
         <dependencies>
@@ -38,9 +39,21 @@
                 <version>1.27.1</version>
                 <scope>runtime</scope>
             </dependency>
+            <dependency>
+				<groupId>org.springframework.ai</groupId>
+				<artifactId>spring-ai-bom</artifactId>
+				<version>${spring-ai.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>
+        <!-- MCP Server dependencies -->
+        <dependency>
+            <groupId>org.springframework.ai</groupId>
+            <artifactId>spring-ai-starter-mcp-server-webmvc</artifactId>
+        </dependency>
         <!-- Spring Boot dependencies -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
